@@ -1,0 +1,90 @@
+ @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap');
+:root{
+    --primary-colour:hsl(222, 26%, 31%);
+    --keypad-background: hsl(223, 31%, 20%);
+    --screen-background:hsl(224, 36%, 15%);
+}
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'League Spartan', sans-serif;
+    background-color:var(--primary-colour);
+    min-height: 100vh;
+    padding: 35px 0px;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content:  space-between;
+}
+
+.container{
+   width: 85%;
+   margin: 0 auto;
+}
+
+.header{
+    font-size: 33px;
+    color: #fff;
+    font-weight:700;
+}
+
+.display{
+    margin-top:30px;
+    width: 100%;
+    background-color: var(--screen-background);
+    padding: 30px 10px;
+    text-align: right;
+    border-radius: 15px;
+    color:#fff;
+    font-size: 30px;
+}
+
+.key-container{
+    margin-top: 20px;
+    background-color: var(--keypad-background);
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+}
+
+.key-container .flex{
+    margin: -10px -5px;
+}
+
+.key{
+    color: hsl(221, 14%, 31%);
+    background-color:hsl(0, 0%, 100%);
+    font-size: 25px;
+    text-align: center;
+    padding: 20px 0;
+    flex: 1;
+    margin: 10px 5px;
+    border-radius: 7px;
+    border-bottom: 4px solid rgb(206, 201, 201);
+    cursor: pointer;
+}
+.grey-background{
+    background-color: hsl(225, 21%, 49%);
+    border-color:  hsl(224, 28%, 35%);
+    color:#fff;
+}
+
+.equal{
+    background-color:hsl(6, 63%, 50%);
+    border-color: hsl(6, 70%, 34%);
+    color:#fff;
+}
+
+@media(min-width:500px){
+     .container{
+        width: 100%;
+        max-width: 500px;
+     }
+}
