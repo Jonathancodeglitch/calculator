@@ -9,35 +9,35 @@
 <body>
     <div class="container">
         <div class="header">calc</div>
-        <div class="display">8,843,000,359,000</div>
+        <div class="display" id="display">0</div>
         <div class="key-container">
            <div class="flex">
-                <div class="key">7</div>
-                <div class="key">8</div>
-                <div class="key">9</div>
+                <div class="key operand">7</div>
+                <div class="key operand">8</div>
+                <div class="key operand">9</div>
                 <div class="key grey-background">DEL</div>
            </div>
             <div class="flex">
-                <div class="key">4</div>
-                <div class="key">5</div>
-                <div class="key">6</div>
-                <div class="key">+</div>
+                <div class="key operand">4</div>
+                <div class="key operand">5</div>
+                <div class="key operand">6</div>
+                <div class="key operator">+</div>
             </div>
             <div class="flex">
-                <div class="key">1</div>
-                <div class="key">2</div>
-                <div class="key">3</div>
-                <div class="key">-</div>
+                <div class="key operand">1</div>
+                <div class="key operand">2</div>
+                <div class="key operand">3</div>
+                <div class="key operator">-</div>
             </div>
             <div class="flex">
-                <div class="key">.</div>
-                <div class="key">0</div>
-                <div class="key">/</div>
-                <div class="key">x</div>
+                <div class="key decimal">.</div>
+                <div class="key operand">0</div>
+                <div class="key operator">/</div>
+                <div class="key operator">x</div>
             </div>
             <div class="flex">
-                <div class="key grey-background">RESET</div>
-                <div class="key equal">=</div>
+                <div class="key grey-background" data-action="clear">RESET</div>
+                <div class="key equal" id="evaluate"  data-action="equal">=</div>
             </div>
         </div>
     </div>
