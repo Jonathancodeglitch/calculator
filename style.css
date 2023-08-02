@@ -40,23 +40,13 @@ body{
     width: 100%;
     background-color: var(--screen-background);
     padding:15px 10px;
-    height: 100px;
+    height: 80px;
     border-radius: 15px;
     color:#fff;
-    font-size: 45px;
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.display > *+*{
-    margin-top:5px;
-}
-
-.equation{
     font-size: 30px;
+    text-align: right;
 }
+
 
 .key-container{
     margin-top: 20px;
@@ -81,6 +71,7 @@ body{
     border-radius: 7px;
     border-bottom: 4px solid rgb(206, 201, 201);
     cursor: pointer;
+    transition:  1s ease-in all;
 }
 .grey-background{
     background-color: hsl(225, 21%, 49%);
@@ -92,6 +83,11 @@ body{
     background-color:hsl(6, 63%, 50%);
     border-color: hsl(6, 70%, 34%);
     color:#fff;
+}
+
+.active{
+    transform: rotateX(360deg);
+    transform: scale(1.1);
 }
 
 @media(min-width:500px){

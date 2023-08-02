@@ -2,36 +2,96 @@
 //get the first values inputed and store it
 //get the operator that was clicked and save it
 //get the second value after an operator was clicked and store it
+//when the equal key is pressed calculate the first value and second value and display the answe
 let display = document.getElementById('display');
 let keys = document.querySelectorAll('.key');
+
 let isOperatorClicked = false;
+let previousAction = display.dataset.previousAction;
 
 keys.forEach((key) => {
   key.addEventListener('click', function () {
-    let keyValue = this.textContent;
-    let displayValue = display.textContent;
+    keys.forEach((key) => key.classList.remove('active'));
 
+    let keyContent = this.textContent;
+    let displayContent = display.textContent;
+
+    //display clicked numbers
     if (key.classList.contains('operand')) {
-      if (displayValue == '0' || isOperatorClicked) {
+      previousAction = 'number';
+      if (displayContent == '0' || isOperatorClicked) {
+        display.textContent = keyContent;
         isOperatorClicked = false;
-        display.textContent = keyValue;
       } else {
-        display.textContent += keyValue;
+        display.textContent += keyContent;
       }
     }
 
-    if (key.classList.contains('operator')) {
-      display.dataset.firstValue = displayValue;
-      display.dataset.operator = keyValue;
-      isOperatorClicked = true;
+    //add decimal
+    if (key.classList.contains('decimal')) {
+      if (!value.includes('.')) {
+        display.textContent = displayContent + '.';
+      }
     }
 
-    if (key.classList.contains('equal')) {
-      let firstValue = Number(display.dataset.firstValue);
-      let secondValue = Number(displayValue);
+    //when an operator is clicked
+    if (key.classList.contains('operator')) {
+      this.classList.add('active');
+      isOperatorClicked = true;
+
+      let secondValue = displayContent;
+      let firstValue = display.dataset.firstValue;
       let operator = display.dataset.operator;
 
-      display.textContent = operate(firstValue, operator, secondValue);
+      if (firstValue && operator && previousAction !== 'operator') {
+      
+        display.textContent = operate(
+          Number(firstValue),
+          operator,
+          Number(secondValue)
+        );
+          
+        display.dataset.firstValue = display.textContent;
+      } else {
+        display.dataset.firstValue = displayContent;
+      }
+
+      display.dataset.operator = keyContent;
+      previousAction = 'operator';
+    }
+
+    
+    if (key.classList.contains('del')) {
+      let newStr = displayContent.split('');
+      if (newStr.length > 1) {
+        newStr.pop();
+        display.textContent = newStr.join('');
+      } else {
+        display.textContent = '0';
+      }
+    }
+ 
+    //reset
+    if (key.classList.contains('clear')) {
+      display.textContent = '0';
+      display.dataset.firstValue=""
+    }
+
+    //equals to
+    if (key.classList.contains('equal')) {
+      let firstValue = display.dataset.firstValue;
+      let secondValue = display.textContent;
+      let operator = display.dataset.operator;
+
+      console.log(secondValue);
+      display.textContent = operate(
+        Number(firstValue),
+        operator,
+        Number(secondValue)
+      );
+
+      display.dataset.firstValue=""
+      previousAction = 'equal';
     }
   });
 });
