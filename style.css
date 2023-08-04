@@ -47,6 +47,15 @@ body{
     text-align: right;
 }
 
+.previous-operand{
+    font-size: 20px;
+    word-wrap: break-word;
+}
+
+.current-operand{
+    margin-top: 10px;
+    word-wrap: break-word;
+}
 
 .key-container{
     margin-top: 20px;
@@ -71,7 +80,7 @@ body{
     border-radius: 7px;
     border-bottom: 4px solid rgb(206, 201, 201);
     cursor: pointer;
-    transition:  1s ease-in all;
+    transition:  .20s ease-in all;
 }
 .grey-background{
     background-color: hsl(225, 21%, 49%);
@@ -82,11 +91,10 @@ body{
 .equal{
     background-color:hsl(6, 63%, 50%);
     border-color: hsl(6, 70%, 34%);
-    color:#fff;
+    color:#ececec;
 }
 
 .active{
-    transform: rotateX(360deg);
     transform: scale(1.1);
 }
 
