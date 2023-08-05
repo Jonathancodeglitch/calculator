@@ -18,12 +18,12 @@ let secondValue = '';
 let previouseAction;
 
 function calculate() {
+  removeOperatorStyle();
+
   let keyContent = this.textContent;
   let keyClass = this.classList;
   let CurrentDisplayValueContent = CurrentDisplayValue.textContent;
   secondValue = CurrentDisplayValueContent;
-
-  removeOperatorStyle();
 
   if (keyClass.contains('operand')) {
     if (CurrentDisplayValueContent == '0') {
@@ -40,9 +40,9 @@ function calculate() {
   ) {
     CurrentDisplayValue.textContent = CurrentDisplayValueContent + keyContent;
   }
-  
-  if (keyClass.contains('operator') && CurrentDisplayValueContent !== '0') {
-    keyClass.add('active'); //add outline styles to operator
+
+  if (keyClass.contains('operator')) {
+    this.classList.add('active'); //add outline styles to operator
 
     if (firstValue !== '' && operator !== '' && previouseAction !== 'equal') {
       CurrentDisplayValue.textContent = operate(
@@ -70,16 +70,21 @@ function calculate() {
   }
 
   if (keyClass.contains('equal')) {
-    // secondValue = CurrentDisplayValueContent;
-
-    previousDisplayValue.textContent = `${firstValue} ${operator} ${secondValue} ${keyContent}`;
-    CurrentDisplayValue.textContent = operate(
-      Number(firstValue),
-      operator,
-      Number(secondValue)
-    );
-
-    previouseAction = 'equal';
+    if (
+      firstValue !== '' &&
+      operator !== '' &&
+      secondValue !== '' &&
+      previouseAction !== 'equal'
+    ) {
+      previousDisplayValue.textContent = `${firstValue} ${operator} ${secondValue} ${keyContent}`;
+      console.log(secondValue);
+      CurrentDisplayValue.textContent = operate(
+        Number(firstValue),
+        operator,
+        Number(secondValue)
+      );
+      previouseAction = 'equal';
+    }
   }
 
   resetCalculator(keyClass);
@@ -119,7 +124,7 @@ function operate(operandA, operator, operandB) {
     return multiply(operandA, operandB);
   }
   if (operator == '÷') {
-    return divide(operandA, operandB);
+    return operandB == 0 ? 'DUMBASS' : divide(operandA, operandB);
   }
 }
 
