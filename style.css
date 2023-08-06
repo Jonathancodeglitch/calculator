@@ -45,15 +45,19 @@ body{
     color:#fff;
     font-size: 30px;
     text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
 }
 
 .previous-operand{
     font-size: 20px;
     word-wrap: break-word;
+    font-weight: normal;
 }
 
 .current-operand{
-    margin-top: 10px;
     word-wrap: break-word;
 }
 
