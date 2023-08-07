@@ -112,17 +112,17 @@ function operate(firstValue, operator, secondValue) {
 }
 
 function add(a, b) {
-  return Number(a) + Number(b);
+  return (Number(a) + Number(b));
 }
 
 function subtract(a, b) {
-  return Number(a) - Number(b);
+  return (Number(a) - Number(b));
 }
 
 function multiply(a, b) {
-  return Number(a) * Number(b);
+  return (Number(a) * Number(b));
 }
 
 function division(a, b) {
-  return Number(a) / Number(b);
+  return b == '0' ? 'DUMBASS' : (Number(a) / Number(b));
 }
