@@ -45,7 +45,13 @@ function calculate() {
   if (keyClass.contains('operator')) {
     this.classList.add('active'); //add style to the clicked operator
 
-    if (firstValue && operator && previousKeyType == 'number') {
+    if (
+      firstValue &&
+      operator &&
+      previousKeyType == 'operator' &&
+      previousKeyType !== 'equal'
+    ) {
+      console.log(firstValue, operator, secondValue);
       currentDisplay.textContent = operate(firstValue, operator, secondValue);
       currentDisplay.dataset.firstValue = currentDisplay.textContent;
     } else {
@@ -81,6 +87,7 @@ function calculate() {
     } else {
       currentDisplay.textContent = '0';
     }
+    currentDisplay.dataset.previousKeyType = 'del';
   }
 }
 
@@ -112,17 +119,19 @@ function operate(firstValue, operator, secondValue) {
 }
 
 function add(a, b) {
-  return (Number(a) + Number(b));
+  return Number(a) + Number(b);
 }
 
 function subtract(a, b) {
-  return (Number(a) - Number(b));
+  return Number(a) - Number(b);
 }
 
 function multiply(a, b) {
-  return (Number(a) * Number(b));
+  return Number(a) * Number(b);
 }
 
 function division(a, b) {
-  return b == '0' ? 'DUMBASS' : (Number(a) / Number(b));
+  return b == '0' ? 'DUMBASS' : Number(a) / Number(b);
 }
+
+
