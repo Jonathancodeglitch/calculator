@@ -48,7 +48,7 @@ function calculate() {
     if (
       firstValue &&
       operator &&
-      previousKeyType == 'operator' &&
+      previousKeyType !== 'operator' &&
       previousKeyType !== 'equal'
     ) {
       console.log(firstValue, operator, secondValue);
@@ -133,5 +133,3 @@ function multiply(a, b) {
 function division(a, b) {
   return b == '0' ? 'DUMBASS' : Number(a) / Number(b);
 }
-
-
