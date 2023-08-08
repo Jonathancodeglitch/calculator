@@ -12,6 +12,8 @@ const previouDisplay = document.querySelector('.previous-operand');
 const currentDisplay = document.querySelector('.current-operand');
 const keys = document.querySelectorAll('.key');
 
+let isEqualKeyClicked = false;
+
 keys.forEach((key) => {
   key.addEventListener('click', calculate);
 });
@@ -30,7 +32,11 @@ function calculate() {
 
   if (keyClass.contains('operand')) {
     showDisplayValue();
-    if (currentDisplayValue == 0 || previousKeyType == 'operator') {
+    if (
+      currentDisplayValue == '0' ||
+      previousKeyType == 'operator' ||
+      previousKeyType == 'equal'
+    ) {
       currentDisplay.textContent = keyContent;
     } else {
       currentDisplay.textContent += keyContent;
@@ -38,8 +44,15 @@ function calculate() {
     currentDisplay.dataset.previousKeyType = 'number';
   }
 
-  if (keyClass.contains('decimal') && !currentDisplayValue.includes('.')) {
-    currentDisplay.textContent = currentDisplayValue + '.';
+  if (keyClass.contains('decimal')) {
+    showDisplayValue();
+    if (!currentDisplayValue.includes('.')) {
+      currentDisplay.textContent = currentDisplayValue + '.';
+    } else if (previousKeyType == 'operator' || previousKeyType == 'equal') {
+      currentDisplay.textContent = '0.';
+    }
+
+    currentDisplay.dataset.previousKeyType = 'decimal';
   }
 
   if (keyClass.contains('operator')) {
@@ -49,33 +62,49 @@ function calculate() {
       firstValue &&
       operator &&
       previousKeyType !== 'operator' &&
-      previousKeyType !== 'equal'
+      previousKeyType !== 'equal' &&
+      isEqualKeyClicked == false
     ) {
+      console.log(isEqualKeyClicked);
       console.log(firstValue, operator, secondValue);
-      currentDisplay.textContent = operate(firstValue, operator, secondValue);
-      currentDisplay.dataset.firstValue = currentDisplay.textContent;
+      const calVal = operate(firstValue, operator, secondValue);
+      currentDisplay.textContent = calVal;
+      currentDisplay.dataset.firstValue = calVal;
     } else {
       currentDisplay.dataset.firstValue = currentDisplay.textContent;
     }
     currentDisplay.dataset.operator = keyContent;
     previouDisplay.textContent = currentDisplay.textContent + keyContent;
+    isEqualKeyClicked = false;
     currentDisplay.dataset.previousKeyType = 'operator';
     hideDisplayValue();
   }
 
   if (keyClass.contains('equal')) {
-    if (firstValue && operator && previousKeyType !== 'equal') {
+    showDisplayValue();
+    if (firstValue && operator) {
+      if (previousKeyType === 'equal') {
+        //update firstValue and secondValue when
+        firstValue = currentDisplayValue;
+        secondValue = currentDisplay.dataset.modValue;
+        previouDisplay.textContent = `${firstValue} ${operator} ${secondValue} =`;
+      }
       previouDisplay.textContent = `${firstValue} ${operator} ${secondValue} =`;
       currentDisplay.textContent = operate(firstValue, operator, secondValue);
+      //store previous second value
+      currentDisplay.dataset.modValue = secondValue;
+      isEqualKeyClicked = true;
       currentDisplay.dataset.previousKeyType = 'equal';
     }
   }
 
   if (keyClass.contains('clear')) {
+    currentDisplay.textContent = '0';
     currentDisplay.dataset.firstValue = '';
     currentDisplay.dataset.operator = '';
+    currentDisplay.dataset.modValue = '';
+    secondValue = '';
     previouDisplay.textContent = '';
-    currentDisplay.textContent = '0';
     currentDisplay.dataset.previousKeyType = 'clear';
   }
 
