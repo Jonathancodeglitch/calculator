@@ -1,12 +1,3 @@
-//get all the calculator btns
-//display the key clicked with the correct content
-//save the first value
-// save the operator
-// save the second value
-//create a function to called operate that that take the first value operator and the second value and return and display the answer
-//when and operator is clicked after the first value is present and operator is present display answer plus the opertor clicked
-
-//the caculator should be able to do basic math
 
 const previouDisplay = document.querySelector('.previous-operand');
 const currentDisplay = document.querySelector('.current-operand');
